@@ -11,7 +11,13 @@ if [ -z "$NIMBLE_WALLET_ADDRESS" ]; then
     echo "ERROR: Cannot start nimble miner due to missing environment variables."
 else
     echo '-- SETTING UP THE NIMBLE MINER --'
-    sleep 3
+    echo "Preparing Nimble miner with the following settings:"
+    echo "NIMBLE_MINER_ID: $NIMBLE_MINER_ID"
+    echo "NIMBLE_WALLET_ADDRESS: $NIMBLE_WALLET_ADDRESS"
+    echo ''
+    echo 'If something is not right, press Ctrl+C to abort.'
+    sleep 5
+    touch "miner-$NIMBLE_MINER_ID-wallet-$NIMBLE_WALLET_ADDRESS.txt" 
     
     WORKDIR=~/nimble
     mkdir -p $WORKDIR
@@ -36,19 +42,8 @@ numpy
 gitpython==3.1.42' > requirements.txt
 
     make install
-    
-    echo "-- Preparing Nimble miner with the following settings --"
-    echo "NIMBLE_MINER_ID: $NIMBLE_MINER_ID"
-    echo "NIMBLE_WALLET_ADDRESS: $NIMBLE_WALLET_ADDRESS"
-    echo ''
-    echo 'If something is not right, press Ctrl+C to abort.'
-    sleep 5
-    
-    # for a quick identification
-    touch "miner-$NIMBLE_MINER_ID-wallet-$NIMBLE_WALLET_ADDRESS"
-    
+    echo "Starting Nimble Miner session. Use 'tmux a -t nimble' to view the output."
     tmux new-session -d -s "nimble" "make run addr=${NIMBLE_WALLET_ADDRESS}" || echo 'ERROR: nimble session not started'
-    
 fi
 
 
