@@ -42,6 +42,15 @@ numpy
 gitpython==3.1.42' > requirements.txt
 
     make install
+
+    # Customize TMUX
+    touch ~/.tmux.conf
+    echo '
+set -g status-bg cyan
+set -g window-status-style bg=yellow
+set -g window-status-current-style bg=red,fg=white' > ~/.tmux.conf
+    tmux tmux source-file ~/.tmux.conf
+
     echo "Starting Nimble Miner session. Use 'tmux a -t nimble' to view the output."
     tmux new-session -d -s "nimble" "make run addr=${NIMBLE_WALLET_ADDRESS}" || echo 'ERROR: nimble session not started'
 fi
