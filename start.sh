@@ -2,8 +2,8 @@
 
 source ~/.profile
 
-echo "Installing required libraries: python3-pip python3-venv tmux nano git"
-apt update && apt install -y --no-install-recommends python3-pip python3-venv tmux nano git
+echo "Installing required libraries: python3-pip python3-venv tmux nano git jq"
+apt update && apt install -y --no-install-recommends python3-pip python3-venv tmux nano git jq
 
 echo ''  # for spacing
 
